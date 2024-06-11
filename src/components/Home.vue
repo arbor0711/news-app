@@ -1,6 +1,7 @@
 <script setup>
 import { useNews } from "../stores/index";
 import { onMounted } from "vue";
+import NewsCard from "./NewsCard.vue";
 const newsStore = useNews();
 onMounted(() => {
   newsStore.fetchNews();
@@ -9,17 +10,20 @@ onMounted(() => {
 
 <template>
   <div>
-    <!-- {{ newsStore.news }} -->
-
-    <h1>Home</h1>
     <div class="news-container">
-      <div v-for="(newsItem, index) in newsStore.news" :key="index">
-        <h2>{{ newsItem.title }}</h2>
-        <p>{{ newsItem.description }}</p>
-        <a :href="newsItem.url" target="_blank">Read more</a>
-      </div>
+      <NewsCard
+        v-for="(
+          { title, author, publishedAt, source, description, url, urlToImage },
+          index
+        ) in newsStore.news"
+        :key="index"
+        :title="title"
+        :description="description"
+        :url="url"
+        :imageUrl="urlToImage"
+      />
     </div>
   </div>
 </template>
 
-<style scoped></style>
+<style></style>
