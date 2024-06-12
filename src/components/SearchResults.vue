@@ -36,18 +36,20 @@ export default {
 </script>
 
 <template>
-  <div class="search-title">
-    <p>Search Results for "{{ query }}"</p>
-  </div>
-  <div class="news-container">
-    <NewsCard
-      v-for="(result, index) in searchResults"
-      :key="index"
-      :title="result.title"
-      :description="result.description"
-      :url="result.url"
-      :imageUrl="result.urlToImage"
-    />
+  <div>
+    <div class="search-title">
+      <p>Search Results for "{{ query }}"</p>
+    </div>
+    <div class="news-container">
+      <NewsCard
+        v-for="(result, index) in searchResults"
+        :key="index"
+        :title="result.title"
+        :description="result.description"
+        :url="result.url"
+        :imageUrl="result.urlToImage"
+      />
+    </div>
   </div>
 </template>
 
