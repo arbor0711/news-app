@@ -2,7 +2,6 @@
 
 MimicMedia is a mini-project built using Vue.js (Composition API), Pinia (state management), and Vue Router (for handling routing), among other technologies. It fetches data from the [NewsAPI.org API](https://newsapi.org) to provide up-to-date news content.
 
-To see the live project, visit [news-app-indol-xi.vercel.app](https://news-app-indol-xi.vercel.app/).
 
 ## 🔑 Get Your API Key
 
