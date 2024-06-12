@@ -2,9 +2,11 @@
 import { useNews } from "../stores/index";
 import { onMounted } from "vue";
 import NewsCard from "./NewsCard.vue";
+
 const newsStore = useNews();
+
 onMounted(() => {
-  newsStore.fetchNews();
+  newsStore.fetchAllNews();
 });
 </script>
 
