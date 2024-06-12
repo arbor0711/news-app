@@ -1,3 +1,5 @@
+// TODO: Save your API key in a .env file and use it here
+
 export default class NewsApi {
   // Fetch news from the API
   async fetchAllNews() {

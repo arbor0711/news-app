@@ -1,60 +1,45 @@
-<script>
-import { ref, onMounted } from "vue";
+<script setup>
+import { ref, toRefs } from "vue";
 import { useRoute } from "vue-router";
-import { useNews } from "../stores/index";
+import { useNews, useToggle } from "../stores";
 
-export default {
-  setup() {
-    const route = useRoute();
-    const title = ref("");
-    const newsStore = useNews();
-    const news = ref(null);
-    const allNews = newsStore.news;
+const toggle = useToggle();
+const { showSearch } = toRefs(toggle);
+showSearch.value = false;
 
-    onMounted(() => {
-      title.value = route.params.title;
+const route = useRoute();
+const { title } = route.params;
 
-      news.value = allNews.find((item) => item.title.includes(title.value));
-    });
+const newsStore = useNews();
+const news = ref(newsStore.news.find((item) => item.title.includes(title)));
 
-    const formatDate = (dateString) => {
-      const isoDate = dateString;
-      const date = new Date(isoDate);
-      const options = {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        hour: "numeric",
-        minute: "numeric",
-        hour12: true,
-      };
-      const readableDate = date.toLocaleDateString("en-US", options);
-      return readableDate;
-    };
-
-    return {
-      formatDate,
-
-      title,
-      news,
-    };
-  },
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  const options = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true,
+  };
+  return date.toLocaleDateString("en-US", options);
 };
 </script>
 
 <template>
-  <div class="news-detail">
-    <h1 class="news-title">{{ news?.title }}</h1>
+  <div class="news-detail" v-if="news">
+    <h1 class="news-title">{{ news.title }}</h1>
     <p class="news-published-at">
-      {{ formatDate(news?.publishedAt) }}
+      {{ formatDate(news.publishedAt) }}
     </p>
-    <a class="news-source" :href="news?.url">Source: {{ news?.source.name }}</a>
-    <img :src="news?.urlToImage" alt="Article image" class="news-image" />
+    <a class="news-source" :href="news.url">Source: {{ news.source.name }}</a>
+    <img :src="news.urlToImage" alt="Article image" class="news-image" />
 
-    <p class="news-description">{{ news?.description }}</p>
-    <p class="news-content">{{ news?.content }}</p>
+    <p class="news-description">{{ news.description }}</p>
+    <p class="news-content">{{ news.content }}</p>
 
-    <p class="news-author">Author: {{ news?.author }}</p>
+    <p class="news-author">Author: {{ news.author }}</p>
   </div>
 </template>
 
@@ -70,7 +55,12 @@ export default {
   margin-bottom: 20px;
 }
 
-.news-source,
+.news-source {
+  text-decoration: none;
+  font-size: 1.5rem;
+  color: #b3b3b3;
+}
+
 .news-author,
 .news-description,
 .news-published-at,

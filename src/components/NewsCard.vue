@@ -1,5 +1,6 @@
 <script>
 import { useRouter } from "vue-router";
+
 export default {
   props: ["title", "description", "url", "imageUrl"],
   setup(props) {
@@ -22,6 +23,7 @@ export default {
 <template>
   <div class="container">
     <!-- Enable user to go to detail page by clicking either the image or title of news -->
+
     <img @click="handleClick" :src="imageUrl" alt="Article image" />
     <h2 @click="handleClick">{{ title }}</h2>
     <p>{{ description }}</p>

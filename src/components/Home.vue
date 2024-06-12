@@ -1,13 +1,14 @@
 <script setup>
-import { useNews } from "../stores/index";
-import { onMounted } from "vue";
+import { toRefs } from "vue";
+import { useNews, useToggle } from "../stores";
 import NewsCard from "./NewsCard.vue";
 
 const newsStore = useNews();
+newsStore.fetchAllNews();
 
-onMounted(() => {
-  newsStore.fetchAllNews();
-});
+const toggle = useToggle();
+const { showSearch } = toRefs(toggle);
+showSearch.value = false;
 </script>
 
 <template>
@@ -15,8 +16,7 @@ onMounted(() => {
     <div class="news-container">
       <NewsCard
         v-for="(
-          { title, author, publishedAt, source, description, url, urlToImage },
-          index
+          { title, description, url, urlToImage }, index
         ) in newsStore.news"
         :key="index"
         :title="title"
@@ -28,4 +28,8 @@ onMounted(() => {
   </div>
 </template>
 
-<style></style>
+<style>
+.news-container {
+  margin-top: 2rem;
+}
+</style>

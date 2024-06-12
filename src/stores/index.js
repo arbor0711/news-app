@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import NewsApi from "../services/newsApi";
 
 const newsApi = new NewsApi();
-
+// News store
 export const useNews = defineStore("news", {
   state: () => ({
     news: [],
@@ -14,6 +14,19 @@ export const useNews = defineStore("news", {
       this.news = await newsApi.fetchAllNews();
       const data = await response.json();
       this.news = data.articles;
+    },
+  },
+});
+
+// Variables store
+export const useToggle = defineStore("toggle", {
+  state: () => ({
+    showSearch: false,
+  }),
+
+  actions: {
+    toggleSearch() {
+      this.showSearch = !this.showSearch;
     },
   },
 });

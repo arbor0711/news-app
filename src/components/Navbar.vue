@@ -1,15 +1,22 @@
 <script setup>
+import { toRefs } from "vue";
+import { useToggle } from "../stores";
 import SearchInput from "../components/SearchInput.vue";
+import SearchIcon from "../components/SearchIcon.vue";
+
+const toggle = useToggle();
+const { showSearch, toggleSearch } = toRefs(toggle);
 </script>
 
 <template>
   <nav>
     <section>
       <router-link class="logo" to="/">MimicMedia</router-link>
-      <SearchInput />
-      <!-- <button class="search-icon" @click="toggleSearch">🔍</button> -->
+      <span @click="toggleSearch">
+        <SearchIcon width="25" height="25" />
+      </span>
     </section>
-    <!-- <input class="search-input" type="search" placeholder="Search..." /> -->
+    <SearchInput v-show="showSearch" />
   </nav>
 </template>
 
@@ -17,49 +24,22 @@ import SearchInput from "../components/SearchInput.vue";
 nav {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  padding: 0 1rem;
 }
 section {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  width: 100%;
+  padding: 1rem 3rem;
+  align-items: center;
+  border-bottom: 1px solid #c9c9c9;
 }
 .logo {
   font-size: 3rem;
   letter-spacing: -3px;
+  text-decoration: none;
+  color: black;
 }
-.search-icon {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
+
+span {
   cursor: pointer;
-}
-.search-input {
-  width: 100%;
-  padding: 0.5rem;
-}
-@media (min-width: 768px) {
-  nav {
-    flex-direction: row;
-    justify-content: space-between;
-  }
-  .logo {
-    font-size: 3rem;
-    letter-spacing: -3px;
-  }
-  .search-input {
-    width: auto;
-  }
-  .search-icon {
-    display: none;
-  }
-}
-@media (max-width: 767px) {
-  .search-icon {
-    display: block;
-  }
 }
 </style>
