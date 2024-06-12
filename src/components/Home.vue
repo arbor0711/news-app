@@ -12,25 +12,27 @@ const { showSearch } = toRefs(toggle);
 showSearch.value = false;
 
 // make it reactive by using computed
-const newsTitle = computed(() => {
-  return newsStore.news
-    .slice(0, 7)
-    .map(
-      (news) =>
-        // news.title.length > 15 ? news.title.substring(0, 50) + "..." :
-        news.title
-    )
-    .sort((a, b) => a.localeCompare(b));
-});
+// const newsTitle = computed(() => {
+//   return (
+//     newsStore.news
+//       // .slice(0, 7)
+//       .map(
+//         (news) =>
+//           // news.title.length > 15 ? news.title.substring(0, 50) + "..." :
+//           news.title
+//       )
+//       .sort((a, b) => a.localeCompare(b))
+//   );
+// });
 
-const router = useRouter();
-const handleClick = (title) => {
-  // Accept title as a parameter
-  router.push({
-    name: "news-detail",
-    params: { title },
-  });
-};
+// const router = useRouter();
+// const handleClick = (title) => {
+//   // Accept title as a parameter
+//   router.push({
+//     name: "news-detail",
+//     params: { title },
+//   });
+// };
 </script>
 
 <template>
@@ -47,7 +49,7 @@ const handleClick = (title) => {
         :imageUrl="urlToImage"
       />
     </main>
-    <aside class="sidebar">
+    <!-- <aside class="sidebar">
       <h2>Hot News</h2>
       <ul>
         <li
@@ -58,7 +60,7 @@ const handleClick = (title) => {
           {{ title }}
         </li>
       </ul>
-    </aside>
+    </aside> -->
   </div>
 </template>
 
