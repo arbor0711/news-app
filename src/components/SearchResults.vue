@@ -24,7 +24,9 @@ export default {
     );
 
     const searchResults = computed(() =>
-      news.filter((item) => item.title.includes(query.value))
+      news.filter((item) =>
+        item.title.toLowerCase().includes(query.value.toLowerCase())
+      )
     );
 
     return {
