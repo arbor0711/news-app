@@ -1,12 +1,15 @@
-<script></script>
+<script setup>
+import SearchInput from "../components/SearchInput.vue";
+</script>
 
 <template>
   <nav>
     <section>
       <router-link class="logo" to="/">MimicMedia</router-link>
-      <button class="search-icon" @click="toggleSearch">🔍</button>
+      <SearchInput />
+      <!-- <button class="search-icon" @click="toggleSearch">🔍</button> -->
     </section>
-    <input class="search-input" type="search" placeholder="Search..." />
+    <!-- <input class="search-input" type="search" placeholder="Search..." /> -->
   </nav>
 </template>
 
